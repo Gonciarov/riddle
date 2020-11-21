@@ -5,8 +5,8 @@
 .App-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   font-size: calc(10px + 1.5vmin);
 }
 
@@ -17,15 +17,35 @@
 
 .questions li {
   display: flex;
-  align-items: center;
+  align-items: left;
   border: solid 2px #d0d0d0;
   border-radius: .2em;
   padding: .5em .8em .5em .5em;
   margin-bottom: 1em;
+  margin-left: 20px;
 }
 
 .questions p {
   max-width: none;
   font-weight: bold;
   margin: 0;
+}
+
+.question-form {
+  margin-left: 20px;
+}
+
+.container {
+  position: absolute;
+  align-items: left;
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.inline {
+  display: inline;
+  vertical-align: top;
 }

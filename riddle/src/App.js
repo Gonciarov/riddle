@@ -2,37 +2,41 @@
 import React, { useState } from 'react';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {Container, Button, Form} from 'react-bootstrap';
+import AddAnswers from './addAnswers';
 
 const quizzQuestions = [
   { 
-    id: "1",
+    id: "Холмс",
     header: "Бывал ли Шерлок Холмс в России?",
     answer1: "да",
     answer2: "нет",
   },
 
   {
-    id: "2",
+    id: "Пушкин",
     header: "Бывал ли Пушкин в Великобритании",
     answer1: "да",
     answer2: "нет"
   },
 
   {
-    id: "3",
+    id: "Ленин",
     header: "Бывал ли Ленин в Великобритании?",
     answer1: "да",
     answer2: "нет"
   },
 
   {
-    id: "4",
+    id: "Байрон",
     header: "Бывал ли Байрон в России?",
     answer1: "да",
     answer2: "нет"
   }
 
 ]
+
+
 
 
 
@@ -48,43 +52,59 @@ function App() {
   
       updateQuestions(items);
     }
+
+
+
+    
   
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>ВОПРОСЫ</h1>
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="questions">
-          {(provided) => (
-        <ul className="questions" {...provided.droppableProps} ref={provided.innerRef}>
-          {questions.map(({id, header, answer1, answer2}, index) => { 
-            return (
-              <Draggable key={id} draggableId={id} index={index}>
+      
+      <h1>ВОПРОСЫ</h1>
+      
+      
+        <Container className="container">
+        <div className="col-md-8 inline-block">
+          <div className="questions"><Button>Add Question</Button></div>
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="questions">
+            {(provided) => (
+            
+          <ul className="questions" {...provided.droppableProps} ref={provided.innerRef}>
+            {questions.map(({id, header, answer1, answer2}, index) => { 
+              return (
+                <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
 
-               
-              <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                <h2>
-                  {header}
-                </h2>
-                <p>
-                  {answer1}
-                </p>
-                <p>
-                  {answer2}
-                  </p>
-                  </li>
-                )}
-                </Draggable>
-            );
-          })}
-          {provided.placeholder}
-        </ul>
+
+                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                
+                  <h2>
+                    {id}
+                  </h2>
+                
+                    </li>
+                 
+                  )}
+                  </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </ul>
+        
           )}
         </Droppable>
         </DragDropContext>
+        </div>
         
-      </header>
+        
+          <AddAnswers/>
+        
+        
+          
+        </Container>
+        
+      
     </div>
   );
 }

@@ -1,37 +1,38 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import {Container, Button, Form} from 'react-bootstrap';
 import AddAnswers from './addAnswers';
+import { RiddleContext } from './riddleContext';
 
 const quizzQuestions = [
   { 
-    id: "Холмс",
-    header: "Бывал ли Шерлок Холмс в России?",
-    answer1: "да",
-    answer2: "нет",
+    id: "1",
+    header: "Холмс",
+    question: "Бывал ли Шерлок Холмс в России?",
+    answers: ["да", "нет"]
   },
 
   {
-    id: "Пушкин",
-    header: "Бывал ли Пушкин в Великобритании",
-    answer1: "да",
-    answer2: "нет"
+    id: "2",
+    header: "Пушкин",
+    question: "Бывал ли Пушкин в России?",
+    answers: ["да", "нет"]
   },
 
   {
-    id: "Ленин",
-    header: "Бывал ли Ленин в Великобритании?",
-    answer1: "да",
-    answer2: "нет"
+    id: "3",
+    header: "Ленин",
+    question: "Бывал ли Ленин в России?",
+    answers: ["да", "нет"]
   },
 
   {
-    id: "Байрон",
-    header: "Бывал ли Байрон в России?",
-    answer1: "да",
-    answer2: "нет"
+    id: "4",
+    header: "Байрон",
+    question: "Бывал ли Байрон в России?",
+    answers: ["да", "нет"]
   }
 
 ]
@@ -42,7 +43,7 @@ const quizzQuestions = [
 
 function App() {
     const [questions, updateQuestions] = useState(quizzQuestions);
-  
+    const [value, setValue] = useState({ header: "qu", question: "", answers: [] })
     function handleOnDragEnd(result) {
       if (!result.destination) return;
   
@@ -62,7 +63,7 @@ function App() {
       
       <h1>ВОПРОСЫ</h1>
       
-      
+      <RiddleContext.Provider value={{value, setValue}}>
         <Container className="container">
         <div className="col-md-8 inline-block">
           <div className="questions"><Button>Add Question</Button></div>
@@ -71,16 +72,18 @@ function App() {
             {(provided) => (
             
           <ul className="questions" {...provided.droppableProps} ref={provided.innerRef}>
-            {questions.map(({id, header, answer1, answer2}, index) => { 
+            {questions.map(({id, header}, index) => { 
               return (
                 <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
 
 
-                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                <li ref={provided.innerRef} 
+                {...provided.draggableProps} 
+                {...provided.dragHandleProps}>
                 
                   <h2>
-                    {id}
+                    {header}
                   </h2>
                 
                     </li>
@@ -103,6 +106,7 @@ function App() {
         
           
         </Container>
+        </RiddleContext.Provider>
         
       
     </div>

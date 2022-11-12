@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import InputField from './components/InputField'
 
 type X = {
  a: string,
@@ -16,13 +16,13 @@ interface Person extends X {
 
 
 const App: React.FC = () => {
+
+  const [todo, setTodo] = useState<string>("")
+  console.log(todo)
   return (
     <div className="App">
-    <span className="heading">Taskify</span>
-       
-        <p>
-          Hello world
-        </p>
+    <span className="heading">Taskify</span>  
+    <InputField todo={todo} setTodo={setTodo}/>
         
 
     </div>
